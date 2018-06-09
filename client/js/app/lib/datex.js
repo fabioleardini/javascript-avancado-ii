@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 System.register([], function (_export, _context) {
     "use strict";
 
-    var _createClass, Mensagem;
+    var _createClass, DateHelper;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -32,30 +32,22 @@ System.register([], function (_export, _context) {
                 };
             }();
 
-            Mensagem = function () {
-                function Mensagem() {
-                    var texto = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-                    _classCallCheck(this, Mensagem);
-
-                    this._texto = texto;
+            DateHelper = function () {
+                function DateHelper() {
+                    _classCallCheck(this, DateHelper);
                 }
 
-                _createClass(Mensagem, [{
-                    key: 'texto',
-                    get: function get() {
-
-                        return this._texto;
-                    },
-                    set: function set(texto) {
-
-                        this._texto = texto;
-                    }
+                _createClass(DateHelper, [{
+                    key: "dateToString",
+                    value: function dateToString(date) {}
+                }, {
+                    key: "dateToDate",
+                    value: function dateToDate(string) {}
                 }]);
 
-                return Mensagem;
+                return DateHelper;
             }();
         }
     };
 });
-//# sourceMappingURL=Mensagem.js.map
+//# sourceMappingURL=datex.js.map
