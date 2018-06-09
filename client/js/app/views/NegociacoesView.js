@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['./View', './Helpers/DateHelper', '..controllers/negociacaoController'], function (_export, _context) {
+System.register(['./View', './Helpers/DateHelper', '../controllers/NegociacaoController'], function (_export, _context) {
     "use strict";
 
     var View, DateHelper, currentInstance, _createClass, NegociacoesView;

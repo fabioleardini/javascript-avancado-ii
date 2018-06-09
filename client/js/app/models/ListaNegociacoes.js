@@ -32,7 +32,7 @@ System.register([], function (_export, _context) {
                 };
             }();
 
-            ListaNegociacoes = function () {
+            _export("ListaNegociacoes", ListaNegociacoes = function () {
                 function ListaNegociacoes() {
                     _classCallCheck(this, ListaNegociacoes);
 
@@ -70,7 +70,9 @@ System.register([], function (_export, _context) {
                 }]);
 
                 return ListaNegociacoes;
-            }();
+            }());
+
+            _export("ListaNegociacoes", ListaNegociacoes);
         }
     };
 });

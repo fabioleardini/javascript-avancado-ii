@@ -32,7 +32,7 @@ System.register([], function (_export, _context) {
                 };
             }();
 
-            Mensagem = function () {
+            _export('Mensagem', Mensagem = function () {
                 function Mensagem() {
                     var texto = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
@@ -54,7 +54,9 @@ System.register([], function (_export, _context) {
                 }]);
 
                 return Mensagem;
-            }();
+            }());
+
+            _export('Mensagem', Mensagem);
         }
     };
 });

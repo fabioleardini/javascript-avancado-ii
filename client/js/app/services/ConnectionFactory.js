@@ -3,7 +3,7 @@
 System.register([], function (_export, _context) {
     "use strict";
 
-    var _createClass, ConnectionFactory;
+    var _createClass, stores, version, dbName, connection, close, ConnectionFactory;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -32,85 +32,78 @@ System.register([], function (_export, _context) {
                 };
             }();
 
-            ConnectionFactory = function () {
+            stores = ['negociacoes'];
+            version = 4;
+            dbName = 'aluraframe';
+            connection = null;
+            close = null;
 
-                var stores = ['negociacoes'];
-                var version = 4;
-                var dbName = 'aluraframe';
+            _export('ConnectionFactory', ConnectionFactory = function () {
+                function ConnectionFactory() {
+                    _classCallCheck(this, ConnectionFactory);
 
-                var connection = null;
+                    throw new Error('Não é possível criar instâncias de ConnectionFactory');
+                }
 
-                var close = null;
+                _createClass(ConnectionFactory, null, [{
+                    key: 'getConnection',
+                    value: function getConnection() {
 
-                return function () {
-                    function ConnectionFactory() {
-                        _classCallCheck(this, ConnectionFactory);
+                        return new Promise(function (resolve, reject) {
 
-                        throw new Error('Não é possível criar instâncias de ConnectionFactory');
-                    }
+                            var openRequest = window.indexedDB.open(dbName, version);
 
-                    _createClass(ConnectionFactory, null, [{
-                        key: 'getConnection',
-                        value: function getConnection() {
+                            openRequest.onupgradeneeded = function (e) {
 
-                            return new Promise(function (resolve, reject) {
-                                var openRequest = window.indexedDB.open(dbName, version);
+                                ConnectionFactory._createStores(e.target.result);
+                            };
 
-                                openRequest.onupgradeneeded = function (e) {
+                            openRequest.onsuccess = function (e) {
 
-                                    ConnectionFactory._createStores(e.target.result);
-                                };
-
-                                openRequest.onsuccess = function (e) {
-
-                                    if (!connection) {
-
-                                        connection = e.target.result;
-                                        close = connection.close.bind(connection); // muda o scopo do close para connection
-                                        connection.close = function () {
-                                            throw new Error('Você não pode fechar diretamente a conexão');
-                                        };
-                                    }
-
-                                    resolve(connection);
-                                };
-
-                                openRequest.onerror = function (e) {
-
-                                    console.log(e.target.error);
-
-                                    reject(e.target.error.name);
-                                };
-                            });
-                        }
-                    }, {
-                        key: '_createStores',
-                        value: function _createStores(connection) {
-
-                            stores.forEach(function (store) {
-
-                                if (connection.objectStoreNames.contains(store)) {
-                                    connection.deleteObjectStore(store);
+                                if (!connection) {
+                                    connection = e.target.result;
+                                    close = connection.close.bind(connection);
+                                    connection.close = function () {
+                                        throw new Error('Você não pode fechar diretamente a conexão');
+                                    };
                                 }
+                                resolve(connection);
+                            };
 
-                                connection.createObjectStore(store, { autoIncrement: true });
-                            });
+                            openRequest.onerror = function (e) {
+
+                                console.log(e.target.error);
+
+                                reject(e.target.error.name);
+                            };
+                        });
+                    }
+                }, {
+                    key: '_createStores',
+                    value: function _createStores(connection) {
+
+                        stores.forEach(function (store) {
+
+                            if (connection.objectStoreNames.contains(store)) connection.deleteObjectStore(store);
+                            connection.createObjectStore(store, { autoIncrement: true });
+                        });
+                    }
+                }, {
+                    key: 'closeConnection',
+                    value: function closeConnection() {
+
+                        if (connection) {
+                            close();
+                            connection = null;
+                            close = null;
                         }
-                    }, {
-                        key: 'closeConnection',
-                        value: function closeConnection() {
+                    }
+                }]);
 
-                            if (connection) {
+                return ConnectionFactory;
+            }());
 
-                                close();
-                                connection = null;
-                            }
-                        }
-                    }]);
-
-                    return ConnectionFactory;
-                }();
-            }();
+            _export('ConnectionFactory', ConnectionFactory);
         }
     };
 });

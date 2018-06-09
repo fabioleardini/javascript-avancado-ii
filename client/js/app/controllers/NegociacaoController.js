@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['..models/ListaNegociacoes', '..view/NegociacoesView', '..view/MensagemView', '..service/NegociacaoService', '..helpers/DateHelper', '..helpers/Bind', '..models/Negociacao'], function (_export, _context) {
+System.register(['../models/ListaNegociacoes', '../models/Mensagem', '../views/NegociacoesView', '../views/MensagemView', '../services/NegociacaoService', '../helpers/DateHelper', '../helpers/Bind', '../models/Negociacao'], function (_export, _context) {
     "use strict";
 
     var ListaNegociacoes, Mensagem, NegociacoesView, MensagemView, NegociacaoService, DateHelper, Bind, Negociacao, _createClass, NegociacaoController, negociacaoController;
@@ -21,13 +21,14 @@ System.register(['..models/ListaNegociacoes', '..view/NegociacoesView', '..view/
     return {
         setters: [function (_modelsListaNegociacoes) {
             ListaNegociacoes = _modelsListaNegociacoes.ListaNegociacoes;
-            Mensagem = _modelsListaNegociacoes.Mensagem;
-        }, function (_viewNegociacoesView) {
-            NegociacoesView = _viewNegociacoesView.NegociacoesView;
-        }, function (_viewMensagemView) {
-            MensagemView = _viewMensagemView.MensagemView;
-        }, function (_serviceNegociacaoService) {
-            NegociacaoService = _serviceNegociacaoService.NegociacaoService;
+        }, function (_modelsMensagem) {
+            Mensagem = _modelsMensagem.Mensagem;
+        }, function (_viewsNegociacoesView) {
+            NegociacoesView = _viewsNegociacoesView.NegociacoesView;
+        }, function (_viewsMensagemView) {
+            MensagemView = _viewsMensagemView.MensagemView;
+        }, function (_servicesNegociacaoService) {
+            NegociacaoService = _servicesNegociacaoService.NegociacaoService;
         }, function (_helpersDateHelper) {
             DateHelper = _helpersDateHelper.DateHelper;
         }, function (_helpersBind) {
